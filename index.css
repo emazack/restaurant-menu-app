@@ -11,11 +11,11 @@
   
   body {
     line-height: 1.5;
-    font-family: sans-serif;
     width: 100%;
     max-width: 600px;
     display: flex;
     justify-self: center;
+    font-family: "Smythe", system-ui, sans-serif;
   }
   
   ul,
@@ -52,4 +52,114 @@
     border: none;
     background: none;
   }
+
+  main {
+    width: 100%;
+  }
+
+  .header {
+    position: relative;
+  }
+  
+  .header img {
+    position: absolute;
+
+  }
+  .header .text{
+    color: #FFFFFF;
+    position: absolute;
+    left: 10%;
+    top: 46px;
+  }
+
+  .header .text .title{
+    line-height: 24px;
+    font-size: 39px;
+    margin-bottom: 19px;
+  }
+
+  .header .text .subtitle{
+    line-height: 13.8px;
+    font-size: 22.42px;
+  }
+  
+  
+  .menu-list {
+  }
+  
+  .menu-list .element {
+  }
+  
+  .menu-list .element .container {
+  }
+  
+  .menu-list .element .container .emoji {
+  }
+  
+  .menu-list .element .info {
+  }
+  
+  .menu-list .element .info .name {
+  }
+  
+  .menu-list .element .info .ingredients {
+  }
+  
+  .menu-list .element .info .price {
+  }
+  
+  .menu-list .element .button {
+  }
+  
+  .menu-list .element .button .add-to {
+  }
+  
+  .order {
+  }
+  
+  .order .title {
+  }
+  
+  .order .order-list {
+  }
+  
+  .order .order-list .element {
+  }
+  
+  .order .order-list .element .name {
+  }
+  
+  .order .order-list .element .remove {
+  }
+  
+  .order .order-list .element .price {
+  }
+  
+  .order .total {
+  }
+  
+  .order .total .title {
+  }
+  
+  .order .total .price {
+  }
+  
+  .order .button-container {
+  }
+  
+  .order .button-container .complete {
+  }
+  
+  .modal {
+  }
+  
+  .modal form {
+  }
+  
+  .modal form input[type="text"] {
+  }
+  
+  .modal form .pay {
+  }
+  
   
