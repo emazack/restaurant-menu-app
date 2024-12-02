@@ -2,6 +2,67 @@
     <head>
        <link rel="stylesheet" href="index.css">
     </head>
+    <main>
+        <header class="header">
+            <img src="" alt="">
+            <h1>
+                Jimmy’s Diner
+            </h1>
+            <h2>
+                The best burgers and pizzas in town.
+            </h2>
+        </header>
+        <ul class="menu-list">
+            <li class="element">
+                <div class="container">
+                    <img src="" alt="" class="emoji">
+                </div>
+                <div class="info">
+                    <div class="name">
+                        Pizza
+                    </div>
+                    <div class="ingredients">
+                        pepperoni,mushrom,mozarella
+                    </div>
+                    <div class="price">
+                        $12
+                    </div>
+                </div>
+                <div class="button">
+                    <button class="add-to">
+                        +
+                    </button>
+                </div>
+            </li>
+        </ul>
+        <section class="order">
+            <div class="title">
+                Your order
+            </div>
+            <ul class="order-list">
+                <li class="element">
+                    <div class="name">Pizza</div>
+                    <button class="remove">remove</button>
+                    <div class="price">$12</div>
+                </li>
+            </ul>
+            <div class="total">
+                <div class="title">Total price:</div>
+                <div class="price">26$</div>
+            </div>
+            <div class="button-container">
+                <button class="complete">Complete order</button>
+            </div>
+        </section>
+        <div class="modal">
+            <form>
+                <input type="text" placeholder="Enter your name">
+                <input type="text" placeholder="Enter card number">
+                <input type="text" placeholder="Enter CVV">
+                <button class="pay">Pay</button>
+            </form>
+        </div>
+    </main>
     <body>
 	<script src="index.js"></script>
     </body>
