@@ -251,15 +251,63 @@
   }
   
   .modal {
+    background-color: #FFFFFF;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-60%, -50%);
+    z-index: 1;
+    box-shadow: 5px 5px 100px #757575;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 29px 23px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+
+  .modal .title {
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 46px;
   }
   
   .modal form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
   }
   
   .modal form input[type="text"] {
+    padding: 16px 26px;
+    margin-bottom: 23.22px;
+    border: 1px solid #757575;
+    color: #757575;
+    width: 100%;
+  }
+
+  .modal form input[type="text"]:last-child {
+    margin-bottom: 46px;
   }
   
-  .modal form .pay {
+  .modal form .button-container {
+    width: 100%;
+    background-color: #16DB99;
+    display: flex;
+    color: #FFFFFF;
+  }
+
+  .modal form .button-container .pay {
+    color: #FFFFFF;
+    margin: 0 auto;
+    padding: 18px 0;
+    width: 100%;
+    font-weight: bold;
+    font-size: 20px;
+    cursor: pointer;
   }
   
   
