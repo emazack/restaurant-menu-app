@@ -21,49 +21,18 @@
         </div>
     </header>
     <ul id="menu-list" class="menu-list internal-wrapper"></ul>
-    <section id="order" class="order internal-wrapper">
-        <div class="title">
-            Your order
-        </div>
-        <ul class="order-list">
-            <li class="element">
-                <div class="name">
-                    Pizza
-                    <span class="remove-container">
-                        <button class="remove">remove</button>
-                    </span>
-                </div>
-                <div class="price">$12</div>
-            </li>
-            <li class="element">
-                <div class="name">
-                    Pizza
-                    <span class="remove-container">
-                        <button class="remove">remove</button>
-                    </span>
-                </div>
-                <div class="price">$12</div>
-            </li>
-        </ul>
-        <div class="total">
-            <div class="title">Total price:</div>
-            <div class="price">26$</div>
-        </div>
-        <div class="button-container">
-            <button class="complete">Complete order</button>
-        </div>
-    </section>
-    <!-- <div class="modal internal-wrapper">
+    <section id="order" class="order internal-wrapper"></section>
+    <div id="modal" class="modal internal-wrapper not-visible">
         <div class="title">Enter card details</div>
         <form>
             <input type="text" placeholder="Enter your name">
             <input type="text" placeholder="Enter card number">
             <input type="text" placeholder="Enter CVV">
             <div class="button-container">
-                <button class="pay">Pay</button>
+                <button id="pay-button" class="pay">Pay</button>
             </div>
         </form>
-    </div> -->
+    </div>
 </main>
 
 <body>

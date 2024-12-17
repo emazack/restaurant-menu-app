@@ -2,40 +2,43 @@ import { menuArray } from "/data.js"
 
 const menuList = document.getElementById("menu-list")
 const order = document.getElementById("order")
-const orderList = []
+let orderList = []
+let totalPrice = 0
 
-menuArray.map(element => {
-    const { name, ingredients, id, price, emoji } = element
-    const htmlElement = document.createElement("li")
-    htmlElement.className = 'element';
-    htmlElement.innerHTML =
-        `            
+const handleMainList = () => {
+    menuArray.map(element => {
+        const { name, ingredients, id, price, emoji } = element
+        const htmlElement = document.createElement("li")
+        htmlElement.className = 'element';
+        htmlElement.innerHTML =
+            `            
             <div class="container">
                 <span class="emoji">${emoji}</span>
             </div>
-            <div class="info">
-                <div class="name">
-                    ${name}
+                <div class="info">
+                    <div class="name">
+                        ${name}
+                    </div>
+                    <div class="ingredients">
+                        ${ingredients}
+                    </div>
+                    <div class="price">
+                        $${price}
+                    </div>
                 </div>
-                <div class="ingredients">
-                    ${ingredients}
-                </div>
-                <div class="price">
-                    $${price}
-                </div>
-            </div>
-            <div class="button">
-                <button id=${id} class="add-to">
-                    +
+                <div class="button">
+                    <button id=${id} class="add-to">
+                        +
                 </button>
             </div>
         `;
-    menuList.appendChild(htmlElement)
-})
+        menuList.appendChild(htmlElement)
+        handleOrderList()
+    })
+}
 
 
 
-const addToButtonList = document.querySelectorAll(".add-to")
 
 function getDataFromClickedButton(buttonId) {
     const result = menuArray.find(product => product.id === Number(buttonId));
@@ -46,63 +49,92 @@ function getDataFromClickedButton(buttonId) {
     return result;
 }
 
-addToButtonList.forEach((button) => {
-    button.addEventListener("click", () => {
-        selectedElement = getDataFromClickedButton(button.id)
+const handleOrderList = () => {
+    const addToButtonList = document.querySelectorAll(".add-to")
 
-        const exists = orderList.some(item => 
-            item.id === selectedElement.id
-        )
-        if (exists) {
-            orderList = {...orderList, 
-        }
-        orderList.push(selectedElement)
+    addToButtonList.forEach((button) => {
+        button.addEventListener("click", () => {
+            const selectedElement = getDataFromClickedButton(button.id)
 
-        if (orderList.length > 0) {
+            const exists = orderList.some(item =>
+                item.id === selectedElement.id
+            )
+            if (exists) {
+                orderList = orderList.map(item => {
+                    if (item.id === selectedElement.id) {
+                        return item = { ...item, price: item.price * 2 }
+                    }
+                    return item;
+                });
+            } else {
+                orderList = [...orderList, selectedElement];
+            }
 
-            const htmlOrderList = orderList.map(element => {
-                const { name, id, price } = element
-                const htmlElement = document.createElement("li")
-                htmlElement.className = 'element';
-                htmlElement.innerHTML =
-            `            
-                <div class="name">
-                    ${name}
-                    <span class="remove-container">
-                        <button id=${id} class="remove">remove</button>
-                    </span>
-                </div>
-                <div class="price">$${price}</div>
-            `;
-            })
+            if (orderList.length > 0) {
+                let htmlElement
+                const htmlOrderList = orderList.map(element => {
+                    const { name, id, price } = element
 
-            const totalPrice = orderList.reduce((accumulator, item) => {
-                return accumulator + item.price;
-            }, 0)
+                    htmlElement =
+                        `
+                <li class="element">            
+                    <div class="name">
+                        ${name}
+                        <span class="remove-container">
+                            <button id=${id} class="remove">remove</button>
+                        </span>
+                    </div>
+                    <div class="price">$${price}</div>
+                </li>
+                `;
+                    return htmlElement
+                })
 
-            order.innerHTML =
-            `            
+                totalPrice = orderList.reduce((accumulator, item) => {
+                    return accumulator + item.price;
+                }, 0)
+
+                order.innerHTML =
+                    `            
                 <div class="title">
                     Your order
                 </div>
                 <ul class="order-list">
-                    ${htmlOrderList}
+                    ${htmlOrderList.join("")}
                 </ul>
                 <div class="total">
                     <div class="title">Total price:</div>
                     <div class="price">${totalPrice}$</div>
                 </div>
                 <div class="button-container">
-                    <button class="complete">Complete order</button>
+                    <button id="complete-order" class="complete">Complete order</button>
                 </div>
              `;
-        } else {
-            order.innerHTML = ""
-        }
+                handleModal()
+            } else {
+                order.innerHTML = ""
+            }
+        })
+    });
+}
 
 
-
+const handleModal = () => {
+    const modal = document.getElementById("modal")
+    const completeOrderButton = document.getElementById("complete-order")
+    completeOrderButton.addEventListener("click", () => {
+        modal.classList.remove("not-visible")
     })
-});
+    handlePayment()
+}
+
+const handlePayment = () => {
+    const paymentButton = document.getElementById("pay-button");
+    paymentButton.addEventListener("click", () => {
+        orderList = []
+        totalPrice = 0
+    })
+}
 
 
+handleMainList();

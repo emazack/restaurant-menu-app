@@ -65,6 +65,10 @@
     color:#000000;
   }
 
+  .not-visible {
+    display: none !important;
+  }
+
   main {
     width: 100%;
   }
