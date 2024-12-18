@@ -16,7 +16,7 @@ function getDataFromClickedButton(buttonId, arrayToSearch) {
 }
 
 const renderDataList = () => {
-    menuArray.map(element => {
+    menuArray.forEach(element => {
         const { name, ingredients, id, price, emoji } = element
         const htmlElement = document.createElement("li")
         htmlElement.className = 'element';
