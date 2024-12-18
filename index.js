@@ -33,15 +33,14 @@ const handleMainList = () => {
             </div>
         `;
         menuList.appendChild(htmlElement)
-        handleOrderList()
     })
 }
 
 
 
 
-function getDataFromClickedButton(buttonId) {
-    const result = menuArray.find(product => product.id === Number(buttonId));
+function getDataFromClickedButton(buttonId, arrayToSearch) {
+    const result = arrayToSearch.find(product => product.id === Number(buttonId));
     if (!result) {
         console.error(`id not found: ${buttonId}`);
         return null;
@@ -49,12 +48,60 @@ function getDataFromClickedButton(buttonId) {
     return result;
 }
 
+const renderOrderList = () => {
+
+    if (orderList.length > 0) {
+        let htmlElement
+        const htmlOrderList = orderList.map(element => {
+            const { name, id, price } = element
+
+            htmlElement =
+                `
+        <li class="element">            
+            <div class="name">
+                ${name}
+                <span class="remove-container">
+                    <button id=${id} class="remove">remove</button>
+                </span>
+            </div>
+            <div class="price">$${price}</div>
+        </li>
+        `;
+            return htmlElement
+        })
+
+        totalPrice = orderList.reduce((accumulator, item) => {
+            return accumulator + item.price;
+        }, 0)
+
+        order.innerHTML =
+            `            
+        <div class="title">
+            Your order
+        </div>
+        <ul class="order-list">
+            ${htmlOrderList.join("")}
+        </ul>
+        <div class="total">
+            <div class="title">Total price:</div>
+            <div class="price">$${totalPrice}</div>
+        </div>
+        <div class="button-container">
+            <button id="complete-order" class="complete">Complete order</button>
+        </div>
+     `;
+        handleModal()
+        handleRemoveItem()
+    } else {
+        order.innerHTML = ""
+    }
+}
+
 const handleOrderList = () => {
     const addToButtonList = document.querySelectorAll(".add-to")
-
     addToButtonList.forEach((button) => {
         button.addEventListener("click", () => {
-            const selectedElement = getDataFromClickedButton(button.id)
+            const selectedElement = getDataFromClickedButton(button.id, menuArray)
 
             const exists = orderList.some(item =>
                 item.id === selectedElement.id
@@ -69,51 +116,7 @@ const handleOrderList = () => {
             } else {
                 orderList = [...orderList, selectedElement];
             }
-
-            if (orderList.length > 0) {
-                let htmlElement
-                const htmlOrderList = orderList.map(element => {
-                    const { name, id, price } = element
-
-                    htmlElement =
-                        `
-                <li class="element">            
-                    <div class="name">
-                        ${name}
-                        <span class="remove-container">
-                            <button id=${id} class="remove">remove</button>
-                        </span>
-                    </div>
-                    <div class="price">$${price}</div>
-                </li>
-                `;
-                    return htmlElement
-                })
-
-                totalPrice = orderList.reduce((accumulator, item) => {
-                    return accumulator + item.price;
-                }, 0)
-
-                order.innerHTML =
-                    `            
-                <div class="title">
-                    Your order
-                </div>
-                <ul class="order-list">
-                    ${htmlOrderList.join("")}
-                </ul>
-                <div class="total">
-                    <div class="title">Total price:</div>
-                    <div class="price">${totalPrice}$</div>
-                </div>
-                <div class="button-container">
-                    <button id="complete-order" class="complete">Complete order</button>
-                </div>
-             `;
-                handleModal()
-            } else {
-                order.innerHTML = ""
-            }
+            renderOrderList()
         })
     });
 }
@@ -125,7 +128,6 @@ const handleModal = () => {
     completeOrderButton.addEventListener("click", () => {
         modal.classList.remove("not-visible")
     })
-    handlePayment()
 }
 
 const handlePayment = () => {
@@ -137,4 +139,20 @@ const handlePayment = () => {
 }
 
 
-handleMainList();
+const handleRemoveItem = () => {
+    const removeButtons = document.querySelectorAll(".remove")
+    removeButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const selectedElement = getDataFromClickedButton(button.id, orderList)
+            if (selectedElement) {
+                orderList = orderList.filter(item => item !== selectedElement);
+                renderOrderList()
+            }
+        })
+    })
+}
+
+
+handleMainList()
+handleOrderList()
+handlePayment()
