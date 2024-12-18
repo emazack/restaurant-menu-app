@@ -6,7 +6,7 @@ const modal = document.getElementById("modal")
 let orderList = []
 let totalPrice = 0
 
-function getDataFromClickedButton(buttonId, arrayToSearch) {
+function getItemById(buttonId, arrayToSearch) {
     const result = arrayToSearch.find(product => product.id === Number(buttonId));
     if (!result) {
         console.error(`id not found: ${buttonId}`);
@@ -47,6 +47,7 @@ const renderDataList = () => {
 }
 
 const renderOrderList = () => {
+    order.innerHTML = "";
     if (orderList.length > 0) {
         let htmlElement
         const htmlOrderList = orderList.map(element => {
@@ -94,11 +95,11 @@ const renderOrderList = () => {
     }
 }
 
-const handleOrderList = () => {
+const attachAddToOrderEventListeners = () => {
     const addToButtonList = document.querySelectorAll(".add-to")
     addToButtonList.forEach((button) => {
         button.addEventListener("click", () => {
-            const selectedElement = getDataFromClickedButton(button.id, menuArray)
+            const selectedElement = getItemById(button.id, menuArray)
 
             const exists = orderList.some(item =>
                 item.id === selectedElement.id
@@ -139,7 +140,7 @@ const handleRemoveItem = () => {
     const removeButtons = document.querySelectorAll(".remove")
     removeButtons.forEach((button) => {
         button.addEventListener("click", () => {
-            const selectedElement = getDataFromClickedButton(button.id, orderList)
+            const selectedElement = getItemById(button.id, orderList)
             if (selectedElement) {
                 orderList = orderList.filter(item => item !== selectedElement);
                 renderOrderList()
@@ -150,5 +151,5 @@ const handleRemoveItem = () => {
 
 
 renderDataList()
-handleOrderList()
+attachAddToOrderEventListeners()
 handlePayment()
