@@ -2,10 +2,20 @@ import { menuArray } from "/data.js"
 
 const menuList = document.getElementById("menu-list")
 const order = document.getElementById("order")
+const modal = document.getElementById("modal")
 let orderList = []
 let totalPrice = 0
 
-const handleMainList = () => {
+function getDataFromClickedButton(buttonId, arrayToSearch) {
+    const result = arrayToSearch.find(product => product.id === Number(buttonId));
+    if (!result) {
+        console.error(`id not found: ${buttonId}`);
+        return null;
+    }
+    return result;
+}
+
+const renderDataList = () => {
     menuArray.map(element => {
         const { name, ingredients, id, price, emoji } = element
         const htmlElement = document.createElement("li")
@@ -36,20 +46,7 @@ const handleMainList = () => {
     })
 }
 
-
-
-
-function getDataFromClickedButton(buttonId, arrayToSearch) {
-    const result = arrayToSearch.find(product => product.id === Number(buttonId));
-    if (!result) {
-        console.error(`id not found: ${buttonId}`);
-        return null;
-    }
-    return result;
-}
-
 const renderOrderList = () => {
-
     if (orderList.length > 0) {
         let htmlElement
         const htmlOrderList = orderList.map(element => {
@@ -123,7 +120,6 @@ const handleOrderList = () => {
 
 
 const handleModal = () => {
-    const modal = document.getElementById("modal")
     const completeOrderButton = document.getElementById("complete-order")
     completeOrderButton.addEventListener("click", () => {
         modal.classList.remove("not-visible")
@@ -153,6 +149,6 @@ const handleRemoveItem = () => {
 }
 
 
-handleMainList()
+renderDataList()
 handleOrderList()
 handlePayment()

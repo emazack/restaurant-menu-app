@@ -25,9 +25,9 @@
     <div id="modal" class="modal internal-wrapper not-visible">
         <div class="title">Enter card details</div>
         <form>
-            <input type="text" placeholder="Enter your name">
-            <input type="text" placeholder="Enter card number">
-            <input type="text" placeholder="Enter CVV">
+            <input type="text" required placeholder="Enter your name">
+            <input type="text" required pattern="\d{16}" maxlength="16" placeholder="Enter card number">
+            <input type="password" required pattern="\d{3}" maxlength="3" placeholder="Enter CVV">
             <div class="button-container">
                 <button id="pay-button" class="pay">Pay</button>
             </div>

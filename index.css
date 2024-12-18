@@ -285,7 +285,7 @@
     width: 100%;
   }
   
-  .modal form input[type="text"] {
+  .modal form input {
     padding: 16px 26px;
     margin-bottom: 23.22px;
     border: 1px solid #757575;
@@ -293,7 +293,7 @@
     width: 100%;
   }
 
-  .modal form input[type="text"]:last-child {
+  .modal form input:last-child {
     margin-bottom: 46px;
   }
   
